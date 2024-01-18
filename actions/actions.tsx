@@ -1,22 +1,24 @@
 'use server';
-import { Blog } from "@/models/model";
 import { PrismaClient } from "@prisma/client";
+import { create } from "domain";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 const prisma = new PrismaClient();
 
 export async function addBlog(formData : FormData) {
-    const imageUrl = formData.get('imageUrl');
-    const title = formData.get('title');
-    const category = formData.get('category');
-    const description = formData.get('descrption');
-
-    const newBlog : Blog = await prisma.blog.create({
+    const imageUrl = formData.get('imageUrl') as string;
+    const title = formData.get('title') as string;
+    const category = formData.get('category') as string;
+    const description = formData.get('description') as string;
+    console.log(description);
+    
+    const newBlog = await prisma.blog.create({
         data : {
-            imageUrl : imageUrl || null,
+            imageUrl : imageUrl,
             title : title ,
             category : category,
-            description : description
+            description : description,
+            // comments: {}
         }
     })
     revalidatePath("/blogs/add-blog");
@@ -25,4 +27,12 @@ export async function addBlog(formData : FormData) {
 
 export async function findBlogs() {
   return await prisma.blog.findMany({});
+}
+export async function findBlog(id : string){
+    const blog = await prisma.blog.findFirst({
+        where : {
+            id : id
+        }
+    })
+    return blog;
 }

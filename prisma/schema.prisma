@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -11,29 +8,26 @@ datasource db {
 }
 
 model Comment {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  text      String
-  author    String?  @default("adib")
-  blogId    String   @db.ObjectId
-  blog      Blog?    @relation(fields: [blogId], references: [id])
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id        String @id @default(auto()) @map("_id") @db.ObjectId
+  blog      Blog   @relation(fields: [blogId], references: [id])
+  blogId    String
 }
 
 model Blog {
-  id          String    @id @default(auto()) @map("_id") @db.ObjectId
-  imageUrl    String?
-  title       String
-  author      String    @default("adib")
-  description String?
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  author      String
   category    String
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-  comments    Comment[]
+  createdAt   DateTime @db.Date
+  description String
+  imageUrl    String
+  title       String
+  updatedAt   DateTime @db.Date
+  comments    Comment[]?
 }
 
-// enum Role {
-//   TEACHER
-//   STUDENT
-//   ADMIN
-// }
+model User {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  email    String
+  password String
+  username String
+}

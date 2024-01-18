@@ -43,7 +43,6 @@ export default function AddBlogForm() {
                 <textarea
                     id="description"
                     name="description"
-                    rows={4}
                     className="mt-1 p-2 text-gray-600 w-full border rounded-md"
                     placeholder="Enter description"
                 ></textarea>

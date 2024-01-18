@@ -1,17 +1,30 @@
 import { findBlogs } from "@/actions/actions";
-import { Blog } from "@/models/model";
-import { PrismaClient } from "@prisma/client"
+import BlogItem from "../components/BlogItem";
 
 export default async function Blogs() {
-
-  const prisma = new PrismaClient();
-  const blogs : Blog[] = await findBlogs();
+  const blogs = await findBlogs();
   console.log(blogs);
-  
 
   return (
     <div>
       <h1>Blogs Page</h1>
+      {
+        blogs.map((blog) => {
+          return (
+          <BlogItem 
+              key={blog.id} 
+              author={blog.author} 
+              category={blog.category} 
+              createdAt={blog.createdAt} 
+              description={blog.description} 
+              id={blog.id} 
+              imageUrl={blog.imageUrl} 
+              title={blog.title} 
+              updatedAt={blog.updatedAt} 
+          />
+          )
+        })
+      }
     </div>
   )
 }

@@ -15,9 +15,14 @@ export interface Comment {
     imageUrl?: string | null;
     title: string;
     author: string;
-    description?: string | null;
+    description?: string;
     category: string;
     createdAt: Date;
     updatedAt: Date;
     comments: Comment[];
+  }
+
+  export interface LoginUser{
+    email : string ,
+    password : string 
   }
