@@ -2,6 +2,7 @@ import { PrismaClient } from "@prisma/client";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import NextAuth from "next-auth/next";
+import { findUser } from "@/actions/user.actions";
 
 const prisma = new PrismaClient();
 
@@ -35,10 +36,14 @@ export const authOptions = {
     async signIn({ user, account }) {
       if (account.provider === "google") {
         const { name, email } = user;
-        console.log(user);
-      }
-
-      return user;
+        console.log("user found as ",user);
+        const existingUser = await findUser(email);
+        console.log("already user " , existingUser);
+        if(!existingUser){
+          return null;
+        }
+        return existingUser;
+      }   
     },
   },
   session: {

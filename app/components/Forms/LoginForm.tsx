@@ -1,7 +1,7 @@
 "use client";
 import { FormEvent, useState } from "react"
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { loginUser } from "@/actions/user.actions";
 
 export default function LoginForm() {
@@ -25,11 +25,11 @@ export default function LoginForm() {
             password,
             redirect: false,
           });
-        console.log(res);
-          if (res?.error) {
-           console.log("invalid");   
-            return;
+          console.log(res);
+          if(!res){
+            redirect("/login")
           }
+          redirect("/")
         } catch (error) {
           console.log(error);
         }
@@ -39,11 +39,11 @@ export default function LoginForm() {
         <form className="flex flex-col justify-center items-center shadow-lg p-4 w-[40%] mx-auto mt-4" onSubmit={(e) => handleSubmit(e)}>
             <div className="mb-4">
               <label htmlFor="email" className="block">Email </label>
-              <input className="border-2 border-green-300 py-2" type="text" name="email" onChange={(e) => setEmail(e.target.value)} />
+              <input id="email" className="border-2 border-green-300 py-2" type="text" name="email" onChange={(e) => setEmail(e.target.value)} />
             </div>
             <div className="mb-4">
               <label htmlFor="password" className="block">Password </label>
-            <input className="border-2 border-green-300 py-2" type="password" name="password" onChange={(e) => setPassword(e.target.value)}/>
+            <input id="password" className="border-2 border-green-300 py-2" type="password" name="password" onChange={(e) => setPassword(e.target.value)}/>
             </div>
             <input type="submit" value="login" className="bg-green-500 hover:bg-green-400 rounded-md p-2 w-32 mx-2 text-white" />
             <p>or</p>

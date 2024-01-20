@@ -10,7 +10,7 @@ datasource db {
 model Comment {
   id        String @id @default(auto()) @map("_id") @db.ObjectId
   blog      Blog   @relation(fields: [blogId], references: [id])
-  blogId    String
+  blogId    String @unique
 }
 
 model Blog {
@@ -20,9 +20,10 @@ model Blog {
   createdAt   DateTime @db.Date
   description String
   imageUrl    String
-  title       String
+  title      String
   updatedAt   DateTime @db.Date
-  comments    Comment[]?
+  authorEmail String
+  comments   Comment[]
 }
 
 model User {

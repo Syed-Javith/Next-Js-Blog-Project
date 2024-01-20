@@ -9,3 +9,12 @@ export async function loginUser(email : string , password : string){
       } })
       return user;
 }
+
+export async function findUser(email : string){
+  const user = await prisma.user.findFirst({
+    where : {
+      email
+    }
+  });
+  return user;
+}

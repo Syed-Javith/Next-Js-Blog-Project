@@ -9,7 +9,7 @@ const NavItems = () => {
   return (
     <ul className="flex flex-row">
       <li className={link}>
-        <Link href="/">Home</Link>
+        <Link href="/blogs">Blogs</Link>
       </li>
       {
         data?.user ? 

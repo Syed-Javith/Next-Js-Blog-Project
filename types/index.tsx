@@ -19,7 +19,8 @@ export interface Comment {
     category: string;
     createdAt: Date;
     updatedAt: Date;
-    comments: Comment[];
+    comments: Comment[] | undefined ;
+    authorEmail : string
   }
 
   export interface LoginUser{

@@ -1,6 +1,5 @@
 'use server';
-import { PrismaClient } from "@prisma/client";
-import { create } from "domain";
+import { Blog, PrismaClient } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 const prisma = new PrismaClient();
@@ -11,16 +10,21 @@ export async function addBlog(formData : FormData) {
     const category = formData.get('category') as string;
     const description = formData.get('description') as string;
     console.log(description);
+    const blog = {
+        imageUrl: imageUrl,
+        title: title,
+        category: category,
+        description: description,
+        comments: {}
+    } as unknown as Blog
     
-    const newBlog = await prisma.blog.create({
-        data : {
-            imageUrl : imageUrl,
-            title : title ,
-            category : category,
-            description : description,
-            // comments: {}
-        }
-    })
+    try {
+        const newBlog = await prisma.blog.create({
+            data : blog
+        })
+    } catch (error) {
+        
+    }
     revalidatePath("/blogs/add-blog");
     redirect("/blogs");
 }

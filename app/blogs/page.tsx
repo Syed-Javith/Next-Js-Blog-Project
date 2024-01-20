@@ -21,6 +21,7 @@ export default async function Blogs() {
               imageUrl={blog.imageUrl} 
               title={blog.title} 
               updatedAt={blog.updatedAt} 
+              authorEmail={blog.authorEmail}
           />
           )
         })
