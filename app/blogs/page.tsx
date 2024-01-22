@@ -1,5 +1,5 @@
 import { findBlogs } from "@/actions/blogs.actions";
-import BlogItem from "../components/BlogItem";
+import BlogItem from "../components/Blog/BlogItem";
 
 export default async function Blogs() {
   const blogs = await findBlogs();

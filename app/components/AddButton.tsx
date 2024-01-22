@@ -9,7 +9,7 @@ const AddButton = ({ user } : { user : string | undefined }) => {
     <div>
       {
         data?.user?.email === user && <Link href={"/blogs/add-blog"}>
-      <button className="text-white p-2 bg-gray-600 my-4 rounded-md">
+      <button className="text-white p-2 bg-gray-600 my-4 rounded-md hover:shadow-2xl">
         Add More +
       </button>
       </Link>

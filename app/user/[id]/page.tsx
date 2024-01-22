@@ -1,6 +1,7 @@
 import { findUser, getMyBlogs } from '@/actions/user.actions';
 import AddButton from '@/app/components/AddButton';
-import MyBlog from '@/app/components/MyBlog';
+import MyBlog from '@/app/components/Blog/MyBlog';
+import UpdateDeleteButton from '@/app/components/Buttons/UpdateDeleteButtons';
 import { notFound } from 'next/navigation';
 import React from 'react'
 
@@ -22,9 +23,10 @@ const page = async ({ params }: { params: { id: string } }) => {
       <h3 className="font-bold py-4 text-4xl">My Blogs</h3>
       {
         myBlogs.map((blog) => {
-          return <MyBlog blog={blog} />
+          return <MyBlog email={user?.email} blog={blog} />
         })
       }
+      
       <AddButton user={user?.email} />
     </div>
   )

@@ -15,6 +15,8 @@ export async function addBlog(formData : FormData) {
         title: title,
         category: category,
         description: description,
+        author : "Syed Javith",
+        authorEmail : "syedjavith14@gmail.com",
         comments: {}
     } as unknown as Blog
     
@@ -22,11 +24,13 @@ export async function addBlog(formData : FormData) {
         const newBlog = await prisma.blog.create({
             data : blog
         })
+        revalidatePath("/blogs/add-blog");
+        redirect("/blogs");
     } catch (error) {
-        
+        console.log(error);
+        throw(error);
     }
-    revalidatePath("/blogs/add-blog");
-    redirect("/blogs");
+    
 }
 
 export async function findBlogs() {
@@ -44,4 +48,14 @@ export async function findBlog(id : string){
         }
     })
     return blog;
+}
+
+export async function deleteBlog(id : string){
+    await prisma.blog.delete({
+        where : {
+            id
+        }
+    })
+    revalidatePath("/blogs/add-blog");
+    redirect("/blogs");
 }

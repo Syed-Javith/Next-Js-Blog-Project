@@ -6,7 +6,7 @@ export default function BlogItem(blog : Blog) {
 
     return (
         <div className="py-8 px-12 flex gap-8" id={id}>
-            <img src={imageUrl || ""} alt="" />
+            <img src={imageUrl || ""} alt="" height={20} width={'50%'} />
             <div>
                 <h1 className="text-4xl font-bold my-4">{title}</h1>
                 <p>{description}</p>

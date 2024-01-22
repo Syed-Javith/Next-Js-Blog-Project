@@ -17,11 +17,11 @@ model Blog {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
   author      String
   category    String
-  createdAt   DateTime @db.Date
+  createdAt   DateTime @default(now())
   description String
   imageUrl    String
   title      String
-  updatedAt   DateTime @db.Date
+  updatedAt   DateTime @updatedAt
   authorEmail String
   comments   Comment[]
 }

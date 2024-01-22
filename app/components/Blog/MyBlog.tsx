@@ -1,8 +1,9 @@
 import { Blog } from '@/types'
 import Link from 'next/link'
 import React from 'react'
+import UpdateDeleteButton from '../Buttons/UpdateDeleteButtons'
 
-const MyBlog = ({ blog } : { blog : any }) => {
+const MyBlog = ({ blog  , email } : { blog : any , email : string }) => {
   return (
     <div className="flex flex-col">
             <h4 className="font-bold py-2">{blog.title}</h4>
@@ -14,6 +15,7 @@ const MyBlog = ({ blog } : { blog : any }) => {
                 </>
                 }
             </p>
+            <UpdateDeleteButton id={blog?.id} email={email} />
     </div>
   )
 }
