@@ -1,4 +1,4 @@
-import { findBlogs } from "@/actions/actions";
+import { findBlogs } from "@/actions/blogs.actions";
 import BlogItem from "../components/BlogItem";
 
 export default async function Blogs() {

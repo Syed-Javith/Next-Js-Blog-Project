@@ -13,8 +13,19 @@ export async function loginUser(email : string , password : string){
 export async function findUser(email : string){
   const user = await prisma.user.findFirst({
     where : {
-      email
-    }
+      email : {
+        equals : email
+      }
+    },
   });
   return user;
+}
+
+export async function getMyBlogs(email : string){
+  const myBlogs = prisma.blog.findMany({
+    where : {
+      authorEmail : email
+    }
+  })
+  return myBlogs;
 }

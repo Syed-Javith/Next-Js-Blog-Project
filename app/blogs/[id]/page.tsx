@@ -1,4 +1,4 @@
-import { findBlog } from "@/actions/actions";
+import { findBlog } from "@/actions/blogs.actions";
 import { notFound } from "next/navigation";
 
 export default async function Blog({ params }: {params: {id: string}}) 

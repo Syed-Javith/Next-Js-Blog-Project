@@ -1,6 +1,6 @@
 "use client"
 
-import { addBlog } from "@/actions/actions";
+import { addBlog } from "@/actions/blogs.actions";
 import Button from "@/app/ui/Button";
 
 export default function AddBlogForm() {

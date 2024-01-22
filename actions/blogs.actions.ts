@@ -30,7 +30,12 @@ export async function addBlog(formData : FormData) {
 }
 
 export async function findBlogs() {
-  return await prisma.blog.findMany({});
+  return await prisma.blog.findMany({
+    take : 15 ,
+    orderBy : {
+        title : 'asc'
+    }
+  });
 }
 export async function findBlog(id : string){
     const blog = await prisma.blog.findFirst({

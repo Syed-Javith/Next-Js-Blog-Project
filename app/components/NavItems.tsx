@@ -15,10 +15,13 @@ const NavItems = () => {
         data?.user ? 
         <>
          <li className={link}>
-            <Link href={'/add-blog'}>Create</Link>
+            <Link href={'/blogs/add-blog'}>Create</Link>
         </li>
         <li className={link}>
             <button onClick={() => signOut()}>Logout</button>
+        </li>
+        <li className={link}>
+            <Link href={`/user/${data?.user?.email}`}>Profile</Link>
         </li>
         </> :
         <li className={link}>

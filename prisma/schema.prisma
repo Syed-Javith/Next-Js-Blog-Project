@@ -10,7 +10,7 @@ datasource db {
 model Comment {
   id        String @id @default(auto()) @map("_id") @db.ObjectId
   blog      Blog   @relation(fields: [blogId], references: [id])
-  blogId    String @unique
+  blogId    String @unique @db.ObjectId
 }
 
 model Blog {

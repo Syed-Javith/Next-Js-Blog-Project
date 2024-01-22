@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <div>
       <h1>Hello World</h1>
-      <UserInfo />
+      <img src="/images/scenery.jpg" />
     </div>
   )
 }

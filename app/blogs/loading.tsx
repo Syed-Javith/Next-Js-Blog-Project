@@ -1,7 +1,9 @@
+import { Loader2, Loader2Icon } from "lucide-react"
+
 const loading = () => {
     return (
-      <div>
-        <h1 className="text-8xl my-auto mx-auto text-center">Wait until content is loaded </h1>
+      <div className="w-full h-screen">
+        <Loader2 className="absolute top-[50%] left-[50%] animate-spin" />
       </div>
     )
   }
