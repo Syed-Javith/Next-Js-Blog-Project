@@ -23,7 +23,7 @@ const page = async ({ params }: { params: { id: string } }) => {
       <h3 className="font-bold py-4 text-4xl">My Blogs</h3>
       {
         myBlogs.map((blog) => {
-          return <MyBlog email={user?.email} blog={blog} />
+          return <MyBlog key={blog.id} email={user?.email} blog={blog} />
         })
       }
       
