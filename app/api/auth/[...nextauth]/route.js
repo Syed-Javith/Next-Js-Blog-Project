@@ -6,7 +6,7 @@ import { findUser } from "@/actions/user.actions";
 
 const prisma = new PrismaClient();
 
-export const authOptions = {
+const authOptions = {
   providers: [
     CredentialsProvider({
       name: "credentials",
