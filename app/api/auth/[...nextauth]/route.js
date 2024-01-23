@@ -15,15 +15,20 @@ const authOptions = {
         password: { label: "Password", type: "password" }
       },
       async authorize(credentials) {
-        const { email , password } = credentials;
-        console.log(credentials);
-        const user = prisma.user.findFirst({ where : {
-          email , password
-        } })
-        console.log(user);
-        if (user) 
-          return user 
-      return null;
+        try {
+          const { email , password } = credentials;
+          console.log(credentials);
+          const user = await prisma.user.findFirst({ where : {
+            email , password
+          } })
+          console.log(user);
+          if (user) 
+            return user 
+        return null;
+        } catch (error) {
+          console.log(error);
+          return error;
+        }
       }
     }),
     GoogleProvider({
