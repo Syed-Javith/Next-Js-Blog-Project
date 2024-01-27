@@ -32,6 +32,23 @@ export async function addBlog(formData : FormData) {
     }
     
 }
+export async function updateBlog(formData : FormData , id : string){
+    const imageUrl = formData.get('imageUrl') as string;
+    const title = formData.get('title') as string;
+    const category = formData.get('category') as string;
+    const description = formData.get('description') as string;
+    const res = await prisma.blog.update({
+        where : {
+            id 
+        },
+        data : {
+            imageUrl,
+            title,
+            category,
+            description,
+        }
+    })
+}
 
 export async function findBlogs() {
   return await prisma.blog.findMany({

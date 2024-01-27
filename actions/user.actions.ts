@@ -1,6 +1,7 @@
 'use server';
 
-import { PrismaClient } from "@prisma/client";
+import { RegisterUser } from "@/types";
+import { PrismaClient, User } from "@prisma/client";
 
 const prisma = new PrismaClient();
 export async function loginUser(email : string , password : string){
@@ -8,6 +9,32 @@ export async function loginUser(email : string , password : string){
         email , password
       } })
       return user;
+}
+
+export async function registrUser(user : RegisterUser){
+  const { email , username , password } = user;
+  const res = await prisma.user.findFirst({
+    
+    where : {
+      email
+    },
+    select:{
+      password : false,
+      id : true,
+   
+     },
+  })
+  if(res){
+    return ({ message : "User alreay exists" , user : res})
+  }
+  const register = await prisma.user.create({
+    data : {
+      email ,
+      username,
+      password
+    }
+  })
+  return  { ...register , password : "" };
 }
 
 export async function findUser(email : string){
