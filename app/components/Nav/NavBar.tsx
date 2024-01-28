@@ -17,7 +17,7 @@ export default function NavBar() {
                            className="mr-4"
                            />
                         </Link>
-                        <span className="text-white text-2xl font-bold mx-auto">Blog Website</span>
+                        {/* <span className="text-white text-2xl font-bold mx-auto">Blog Website</span> */}
                     </div>
                     <div className="flex items-center">
                         {/* <Link href="/blogs" className="text-white hover:text-gray-400 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium">

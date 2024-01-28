@@ -25,22 +25,35 @@ const RegisterForm = () => {
       resolver : zodResolver(schema),
     });
   return (
-    <div >
-      <form onSubmit={handleSubmit(registerUserData)} className="flex flex-col gap-4 w-[50%] items-center">
-          <input className="border-2 border-blue-300 " type="text" {...register("username")} />
+    <div className="md:w-[500px] w-auto m-auto p-4">
+      <div className="drop-shadow-xl p-2 shadow-blue-500/50  bg-blue-200 rounded-md ">
+      <form onSubmit={handleSubmit(registerUserData)} className="flex flex-col gap-4 items-center">
+        <h1 className="text-[30px]">Register Here</h1>
+          <div className="flex flex-col">
+            <label htmlFor="username">Username </label>
+            <input className="border-2 border-blue-300 h-10 rounded-md" type="text" {...register("username")} />
+          </div>
           {
-            errors.username?.message
+            errors && <span>{errors.username?.message}</span>
           }
-          <input className="border-2 border-blue-300 " type="password"  {...register("password")} />
+          <div className="flex flex-col">
+            <label htmlFor="email">Email Id</label>
+            <input className="border-2 border-blue-300 h-10 rounded-md" type="email" {...register("email")} />
+          </div>
           {
-            errors.password?.message
+            errors && <span>{errors.email?.message}</span>
           }
-          <input className="border-2 border-blue-300 " type="email" {...register("email")} />
+          <div className="flex flex-col">
+            <label htmlFor="password">Password</label>
+            <input className="border-2 border-blue-300 h-10 rounded-md" type="password"  {...register("password")} />
+          </div>
           {
-            errors.email?.message
+            errors && <span>{errors.password?.message}</span>
           }
-          <input type="submit" value="register" />
+          
+          <input className="cursor-pointer p-2 rounded-md text-white px-4 bg-green-400" type="submit" value="register" />
       </form>
+    </div>
     </div>
   )
 }

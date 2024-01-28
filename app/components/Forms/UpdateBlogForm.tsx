@@ -3,7 +3,7 @@ import { findBlog, updateBlog } from '@/actions/blogs.actions'
 import Button from '@/app/ui/Button'
 import React, { useEffect, useState } from 'react'
 import {useMutation} from "@tanstack/react-query"
-import {toast} from "sonner"
+import {Toaster, toast} from "sonner"
 import { Blog } from '@/types'
 const UpdateBlogForm = ({id} : {id : string}) => {
     const [blog , setBlog] = useState<Blog>({
@@ -23,10 +23,11 @@ const UpdateBlogForm = ({id} : {id : string}) => {
 
     const { mutate , isPending } = useMutation({
         mutationFn : async ({id} : {id:string}) => {
-            const res = await findBlog(id);
+            const res = await findBlog(id); 
             return res;
         },
         onError : (err) => {
+            console.log("error found as");            
             console.log(err);
             toast.error(err.message);
         },
@@ -40,6 +41,7 @@ const UpdateBlogForm = ({id} : {id : string}) => {
 
     useEffect(()=>{
         mutate({id})
+        toast.info("Your Blog is loading please wait...")
     },[])
     return (
         <form action={updateBlogHandeler} className="max-w-md mx-auto mt-8 p-8 bg-white rounded shadow-md">
@@ -102,8 +104,11 @@ const UpdateBlogForm = ({id} : {id : string}) => {
                 />
             </div>
 
-            <Button label={'Update Blog'} color={'green'} />
-
+            <Button label={'Update Blog'} />
+            {/* {
+                isPending && <p>Your blog is loading...</p>
+            } */}
+            <Toaster richColors />
         </form>
     )
 }

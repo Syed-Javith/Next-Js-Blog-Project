@@ -7,7 +7,7 @@ export default async function Blogs() {
 
   return (
     <div>
-      <h1>Blogs Page</h1>
+      <h1 className="text-center font-bold text-3xl my-2">Daily Blogs</h1>
       {
         blogs.map((blog) => {
           return (
