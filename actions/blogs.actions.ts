@@ -49,13 +49,14 @@ export async function updateBlog(formData : FormData , id : string){
             description,
         }
     })
+    revalidatePath("/blogs");
 }
 
 export async function findBlogs() {
   return await prisma.blog.findMany({
     take : 15 ,
     orderBy : {
-        title : 'asc'
+        createdAt : 'asc'
     }
   });
 }

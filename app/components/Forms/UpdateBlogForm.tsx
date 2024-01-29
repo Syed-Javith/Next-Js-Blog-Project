@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react'
 import {useMutation} from "@tanstack/react-query"
 import {Toaster, toast} from "sonner"
 import { Blog } from '@/types'
+import { useRouter } from 'next/navigation'
 const UpdateBlogForm = ({id} : {id : string}) => {
     const [blog , setBlog] = useState<Blog>({
         author : '',
@@ -16,9 +17,19 @@ const UpdateBlogForm = ({id} : {id : string}) => {
         createdAt : new Date(),
         updatedAt : new Date()
     });
+    const router = useRouter()
+    const [updating , setUpdating] = useState<boolean>(false);
     async function updateBlogHandeler(formData: FormData){
         console.log(formData);
-        await updateBlog(formData,id)
+        try {
+            setUpdating(true)
+            await updateBlog(formData,id)
+            toast.success("Blog Updated successfully!")
+            router.refresh()
+        } catch (error) {
+            toast.error("Error : Updating Blog " + error)
+        }
+        setUpdating(false)
     }
 
     const { mutate , isPending } = useMutation({
@@ -103,11 +114,12 @@ const UpdateBlogForm = ({id} : {id : string}) => {
                     placeholder="Enter category"
                 />
             </div>
-
-            <Button label={'Update Blog'} />
-            {/* {
-                isPending && <p>Your blog is loading...</p>
-            } */}
+            {
+                updating ?
+                <>
+                </> :
+                <Button label={'Update Blog'} />
+            }
             <Toaster richColors />
         </form>
     )

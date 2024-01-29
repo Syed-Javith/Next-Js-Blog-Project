@@ -52,6 +52,9 @@ export async function getMyBlogs(email : string){
   const myBlogs = prisma.blog.findMany({
     where : {
       authorEmail : email
+    },
+    orderBy : {
+      updatedAt : "desc"
     }
   })
   return myBlogs;

@@ -8,25 +8,25 @@ import React from 'react'
 const page = async ({ params }: { params: { id: string } }) => {
   const email = decodeURIComponent(params.id);
   const user = await findUser(email);
-  if(user == null){
+  if (user == null) {
     notFound();
   }
-  // console.log("mail " ,email);
-  // console.log(params);
-  // console.log("the user found as ",user);
   const myBlogs = await getMyBlogs(email);
   return (
-    <div className="flex flex-col items-start content-center px-[25%]">
+    <div className="flex flex-col items-start content-center px-[20%] md:px-[25%]">
       <div className="self-center h-[200px] w-[200px] bg-gray-300 rounded-[50%] my-2"></div>
-      <p>  {user?.username}  </p>
+      <p className='font-bold text-lg'>  {user?.username}  </p>
       <p> {user?.email} </p>
+      <p>Total blogs : {myBlogs.length} </p>
+      <p>Last update :{myBlogs[0].updatedAt.toLocaleDateString('in')} </p>
       <h3 className="font-bold py-4 text-4xl">My Blogs</h3>
-      {
-        myBlogs.map((blog) => {
-          return <MyBlog key={blog.id} email={user?.email} blog={blog} />
-        })
-      }
-      
+      <div className='mb-4'>
+        {
+          myBlogs.map((blog) => {
+            return <MyBlog key={blog.id} email={user?.email} blog={blog} />
+          })
+        }
+      </div>
       <AddButton user={user?.email} />
     </div>
   )
