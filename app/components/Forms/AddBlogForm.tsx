@@ -1,12 +1,25 @@
 "use client"
-
 import { addBlog } from "@/actions/blogs.actions";
 import Button from "@/app/ui/Button";
+import { useSession } from "next-auth/react";
+import Link from "next/link";
 
 export default function AddBlogForm() {
 
-    async function addBlogHandler(formData: FormData){
-        await addBlog(formData)
+    const { data } = useSession();
+    if (!data?.user) {
+        return <div className="text-center mx-auto">
+            <p className="mb-4">please login to continue</p>
+            <Link href={'/login'} className="p-2 bg-gray-800 rounded-md text-white">
+                <button>
+                    Login
+                </button>
+            </Link>
+        </div>
+    }
+
+    async function addBlogHandler(formData: FormData) {
+        await addBlog(formData, { author: data?.user?.name + "", authorEmail: data?.user?.email + "" })
     }
     return (
         <form action={addBlogHandler} className="max-w-md mx-auto mt-8 p-8 bg-white rounded shadow-md">
@@ -61,7 +74,7 @@ export default function AddBlogForm() {
                 />
             </div>
 
-            <Button label={'Add New Blog'} color={'green'} />
+            <Button label={'Add New Blog'} />
 
         </form>
     )

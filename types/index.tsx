@@ -33,3 +33,8 @@ export interface Comment {
     password : string,
     username : string
   }
+
+  export interface Author{
+    author : string,
+    authorEmail : string
+  }

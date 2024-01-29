@@ -1,8 +1,13 @@
+import { Loader2 } from "lucide-react"
+
 const loading = () => {
   return (
-    <div>
-      <h1 className="text-8xl mx-auto text-center">Welcome to our site </h1>
+    <div className="w-full h-screen">
+    <div className="flex flex-col items-center justify-center">
+      <p>User Data is loading</p>
+      <Loader2 className="animate-spin" />
     </div>
+  </div>
   )
 }
 

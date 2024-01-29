@@ -1,10 +1,11 @@
 'use server';
+import { Author } from "@/types";
 import { Blog, PrismaClient } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 const prisma = new PrismaClient();
 
-export async function addBlog(formData : FormData) {
+export async function addBlog(formData : FormData , author : Author) {
     const imageUrl = formData.get('imageUrl') as string;
     const title = formData.get('title') as string;
     const category = formData.get('category') as string;
@@ -15,8 +16,8 @@ export async function addBlog(formData : FormData) {
         title: title,
         category: category,
         description: description,
-        author : "Syed Javith",
-        authorEmail : "syedjavith14@gmail.com",
+        author : author.author,
+        authorEmail : author.authorEmail,
         comments: {}
     } as unknown as Blog
     
