@@ -18,9 +18,18 @@ const page = async ({ params }: { params: { id: string } }) => {
       <p className='font-bold text-lg'>  {user?.username}  </p>
       <p> {user?.email} </p>
       <p>Total blogs : {myBlogs.length} </p>
+      {
+        myBlogs.length > 0 && 
       <p>Last update :{myBlogs[0].updatedAt.toLocaleDateString('in')} </p>
+      }
       <h3 className="font-bold py-4 text-4xl">My Blogs</h3>
       <div className='mb-4'>
+        {
+          myBlogs.length === 0 && 
+          <p>
+            No Blogs by the user
+          </p>
+        }
         {
           myBlogs.map((blog) => {
             return <MyBlog key={blog.id} email={user?.email} blog={blog} />
